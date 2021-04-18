@@ -100,5 +100,111 @@ class UsuarioTest : DescribeSpec({
       }
     }
 
+
+
+    describe("Caralibro saber si un usuario no es mas amistoso que otro") {
+      it("Usuario no es mas amistoso que otro") {
+
+        val pedro = Usuario()
+        val mirta = Usuario()
+        val jose = Usuario()
+        val federica = Usuario()
+
+        pedro.agregarAmigo(mirta)
+        pedro.agregarAmigo(jose)
+        pedro.agregarAmigo(federica)
+
+        federica.agregarAmigo(jose)
+
+        val caralibro = Caralibro()
+        caralibro.agregarUsuario(pedro)
+        caralibro.agregarUsuario(federica)
+
+        caralibro.saberSiUnUsuarioEsMasAmistosoQueOtro(federica,pedro).shouldBe(false)
+
+
+      }
+    }
+
+    describe("Caralibro saber si un usuario es mas amistoso que otro") {
+      it("Usuario que si es mas amistoso que otro") {
+
+        val pedro = Usuario()
+        val mirta = Usuario()
+        val jose = Usuario()
+        val federica = Usuario()
+
+        pedro.agregarAmigo(mirta)
+        pedro.agregarAmigo(jose)
+        pedro.agregarAmigo(federica)
+
+        federica.agregarAmigo(jose)
+
+        val caralibro = Caralibro()
+        caralibro.agregarUsuario(pedro)
+        caralibro.agregarUsuario(federica)
+
+        caralibro.saberSiUnUsuarioEsMasAmistosoQueOtro(pedro,federica).shouldBe(true)
+
+
+      }
+    }
+
+
+    describe("Saber si un usuario puede ver cierta publicacion") {
+      it("Usuario puede ver cierta publicacion") {
+
+        val pedro = Usuario()
+        val mirta = Usuario()
+        val jose = Usuario()
+        val federica = Usuario()
+
+        pedro.agregarAmigo(mirta)
+        pedro.agregarAmigo(jose)
+        pedro.agregarAmigo(federica)
+
+        federica.agregarAmigo(jose)
+
+
+        var textoSaludo = Texto("Hola", PermisoSoloAmigos(federica.listaDeAmigos))
+
+        federica.agregarPublicacion(textoSaludo)
+
+        federica.puedeVerPublicacion(jose,textoSaludo).shouldBe(true)
+
+
+
+
+      }
+
+
+      it("Usuario no  puede ver cierta publicacion") {
+
+        val pedro = Usuario()
+        val mirta = Usuario()
+        val jose = Usuario()
+        val federica = Usuario()
+
+        pedro.agregarAmigo(mirta)
+        pedro.agregarAmigo(jose)
+        pedro.agregarAmigo(federica)
+
+        federica.agregarAmigo(jose)
+
+
+        var textoSaludo = Texto("Hola", PermisoSoloAmigos(federica.listaDeAmigos))
+
+        federica.agregarPublicacion(textoSaludo)
+
+        federica.puedeVerPublicacion(mirta,textoSaludo).shouldBe(false)
+
+
+
+
+      }
+
+    }
+
+
   }
 })
