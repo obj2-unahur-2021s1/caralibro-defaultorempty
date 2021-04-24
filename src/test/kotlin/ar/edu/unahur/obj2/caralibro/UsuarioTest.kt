@@ -80,10 +80,12 @@ class UsuarioTest : DescribeSpec({
       it("Texto y me gusta de un usuario") {
         val bienvenida = Texto("Bienvenidos",tipoPermiso = PermisoPublico() )
         val pedro = Usuario()
+        val josefa = Usuario()
 
         bienvenida.agregarLike(pedro)
+        bienvenida.agregarLike(josefa)
 
-        bienvenida.cantidadDeLikes().shouldBe(1)
+        bienvenida.cantidadDeLikes().shouldBe(2)
       }
     }
 
@@ -205,6 +207,211 @@ class UsuarioTest : DescribeSpec({
 
     }
 
+
+
+    describe("Saber el amigo mas popular") {
+      it("Saber el amigo mas popular") {
+
+        val pedro = Usuario()
+        val mirta = Usuario()
+        val jose = Usuario()
+        val federica = Usuario()
+
+        val foto = Foto(120,220,PermisoPublico())
+        foto.agregarLike(mirta)
+        foto.agregarLike(jose)
+        foto.agregarLike(federica)
+
+        pedro.agregarPublicacion(foto)
+
+        pedro.agregarAmigo(mirta)
+        pedro.agregarAmigo(jose)
+        pedro.agregarAmigo(federica)
+
+        federica.agregarAmigo(jose)
+        federica.agregarAmigo(pedro)
+
+        federica.amigoMasPopular().shouldBe(pedro)
+      }
+    }
+
+
+    describe("Determinar los mejores amigos de un usuario") {
+      it("Lista de mejores amigos") {
+
+        val pedro = Usuario()
+        val mirta = Usuario()
+        val jose = Usuario()
+        val federica = Usuario()
+
+        val foto = Foto(120,220,PermisoPublico())
+
+        foto.agregarLike(mirta)
+        foto.agregarLike(jose)
+        foto.agregarLike(federica)
+
+        pedro.agregarPublicacion(foto)
+
+        pedro.agregarAmigo(mirta)
+        pedro.agregarAmigo(jose)
+        pedro.agregarAmigo(federica)
+
+        federica.agregarAmigo(jose)
+        federica.agregarAmigo(pedro)
+
+        pedro.determinarLosMejoresAmigos().count().shouldBe(3)
+
+
+      }
+    }
+
+    describe("Amigo mas popular") {
+      it("Encontrar el amigo mas popular de un usuario") {
+
+        val pedro = Usuario()
+        val mirta = Usuario()
+        val jose = Usuario()
+        val federica = Usuario()
+
+        val foto = Foto(120,220,PermisoPublico())
+        val videoSD = Video(10, CalidadSd(), tipoPermiso = PermisoPublico())
+
+        foto.agregarLike(mirta)
+        foto.agregarLike(jose)
+        foto.agregarLike(federica)
+
+        videoSD.agregarLike(jose)
+
+        //pedroo cantida d likes 3
+        pedro.agregarPublicacion(foto)
+
+        pedro.agregarAmigo(mirta)
+        pedro.agregarAmigo(jose)
+        pedro.agregarAmigo(federica)
+
+        //Federica cantidad de likes 2
+        federica.agregarAmigo(jose)
+        federica.agregarAmigo(pedro)
+        federica.agregarPublicacion(videoSD)
+
+        mirta.agregarAmigo(pedro)
+        mirta.agregarAmigo(federica)
+
+        mirta.amigoMasPopular().shouldBe(pedro)
+       // mirta.amigoMasPopular().shouldBe(federica)
+
+
+      }
+    }
+
+
+    describe("Amigo stalkea a otro") {
+      it("Saber si un uruario stakea  a otro, esto es si likeo al 90% de las publicaciones En este caso SI ") {
+
+        val pedro = Usuario()
+        val mirta = Usuario()
+        val jose = Usuario()
+        val federica = Usuario()
+
+        val foto1 = Foto(120,220,PermisoPublico())
+        val videoSD = Video(10, CalidadSd(), tipoPermiso = PermisoPublico())
+
+        val foto2 = Foto(120,220,PermisoPublico())
+        val foto3 = Foto(120,220,PermisoPublico())
+        val foto4 = Foto(120,220,PermisoPublico())
+        val foto5 = Foto(120,220,PermisoPublico())
+        val foto6 = Foto(120,220,PermisoPublico())
+        val foto7 = Foto(120,220,PermisoPublico())
+        val foto8 = Foto(120,220,PermisoPublico())
+        val foto9 = Foto(120,220,PermisoPublico())
+
+
+        foto1.agregarLike(mirta)
+        foto2.agregarLike(mirta)
+        foto3.agregarLike(mirta)
+        foto4.agregarLike(mirta)
+        foto5.agregarLike(mirta)
+        foto6.agregarLike(mirta)
+        foto7.agregarLike(mirta)
+        foto8.agregarLike(mirta)
+        foto9.agregarLike(mirta)
+      //  videoSD.agregarLike(mirta)
+        videoSD.agregarLike(jose)
+
+        //pedroo cantida d likes 3
+        pedro.agregarPublicacion(foto1)
+        pedro.agregarPublicacion(foto2)
+        pedro.agregarPublicacion(foto3)
+        pedro.agregarPublicacion(foto4)
+        pedro.agregarPublicacion(foto5)
+        pedro.agregarPublicacion(foto6)
+        pedro.agregarPublicacion(foto7)
+        pedro.agregarPublicacion(foto8)
+        pedro.agregarPublicacion(foto9)
+        pedro.agregarPublicacion(videoSD)
+
+        pedro.agregarAmigo(mirta)
+        pedro.agregarAmigo(jose)
+        pedro.agregarAmigo(federica)
+
+        pedro.usuarioStalkeaAmigo(mirta).shouldBe(true)
+      }
+
+
+      it("Saber si un uruario stakea  a otro, esto es si likeo al 90% de las publicaciones. En este caso NO ") {
+
+        val pedro = Usuario()
+        val mirta = Usuario()
+        val jose = Usuario()
+        val federica = Usuario()
+
+        val foto1 = Foto(120,220,PermisoPublico())
+        val videoSD = Video(10, CalidadSd(), tipoPermiso = PermisoPublico())
+
+        val foto2 = Foto(120,220,PermisoPublico())
+        val foto3 = Foto(120,220,PermisoPublico())
+        val foto4 = Foto(120,220,PermisoPublico())
+        val foto5 = Foto(120,220,PermisoPublico())
+        val foto6 = Foto(120,220,PermisoPublico())
+        val foto7 = Foto(120,220,PermisoPublico())
+        val foto8 = Foto(120,220,PermisoPublico())
+        val foto9 = Foto(120,220,PermisoPublico())
+
+
+        foto1.agregarLike(mirta)
+        foto2.agregarLike(mirta)
+        foto3.agregarLike(mirta)
+       //foto4.agregarLike(mirta)
+       //foto5.agregarLike(mirta)
+       //foto6.agregarLike(mirta)
+       //foto7.agregarLike(mirta)
+       //foto8.agregarLike(mirta)
+       //foto9.agregarLike(mirta)
+        //  videoSD.agregarLike(mirta)
+        videoSD.agregarLike(jose)
+
+        //pedroo cantida d likes 3
+        pedro.agregarPublicacion(foto1)
+        pedro.agregarPublicacion(foto2)
+        pedro.agregarPublicacion(foto3)
+        pedro.agregarPublicacion(foto4)
+        pedro.agregarPublicacion(foto5)
+        pedro.agregarPublicacion(foto6)
+        pedro.agregarPublicacion(foto7)
+        pedro.agregarPublicacion(foto8)
+        pedro.agregarPublicacion(foto9)
+        pedro.agregarPublicacion(videoSD)
+
+        pedro.agregarAmigo(mirta)
+        pedro.agregarAmigo(jose)
+        pedro.agregarAmigo(federica)
+
+        pedro.usuarioStalkeaAmigo(mirta).shouldBe(false)
+
+
+
+      }
+    }
 
   }
 })

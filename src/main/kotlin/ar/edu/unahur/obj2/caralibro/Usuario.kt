@@ -1,8 +1,11 @@
 package ar.edu.unahur.obj2.caralibro
 
+import java.util.*
+
 class Usuario {
   val publicaciones = mutableListOf<Publicacion>()
   val listaDeAmigos = mutableListOf<Usuario>()
+  var  id = UUID.randomUUID()
 
   fun agregarPublicacion(publicacion: Publicacion) {
     publicaciones.add(publicacion)
@@ -36,24 +39,45 @@ class Usuario {
   fun determinarLosMejoresAmigos() : List<Usuario>
   {
     var usuariosMejoresAmigos = mutableListOf<Usuario>()
+    var usuariosQueLikearonTodasLasPublicaciones = mutableListOf<Usuario>()
 
-    var a = publicaciones.distinctBy { it.listaDeLikes.distinct() }
+   for ( publicacion in publicaciones)
+   {
+     usuariosMejoresAmigos.addAll(publicacion.listaDeLikes)
+   }
 
-    return usuariosMejoresAmigos
+   for ( usuario in usuariosMejoresAmigos )
+   {
+     if ( publicaciones.all { it.listaDeLikes.contains( usuario) })
+       usuariosQueLikearonTodasLasPublicaciones.add(usuario)
+   }
+
+    return usuariosQueLikearonTodasLasPublicaciones
   }
 
-  fun amigoMasPopular() :Usuario
+  fun amigoMasPopular():Usuario
   {
-   // var a = Usuario()
-
-    //a = listaDeAmigos.maxByOrNull { it.cantidadTotalDeLikesEnTodasLasPublicaciones() }
-
-    return listaDeAmigos.maxByOrNull { it.cantidadTotalDeLikesEnTodasLasPublicaciones() }!!
+       return listaDeAmigos.maxByOrNull { it.cantidadTotalDeLikesEnTodasLasPublicaciones() }!!
   }
 
   fun cantidadTotalDeLikesEnTodasLasPublicaciones(): Int
   {
     return publicaciones.sumBy { it.cantidadDeLikes() }
+  }
+
+  fun usuarioStalkeaAmigo( usuario: Usuario): Boolean
+  {
+    var cantidadDePublicaciones = publicaciones.count()
+   // var cantidadDeLikesDelUser = publicaciones.distinctBy { it.listaDeLikes.contains(usuario) }
+    var cantidadDeLikesDelUser = publicaciones.count { it.listaDeLikes.contains(usuario) }
+
+    return cantidadDeLikesDelUser >= (cantidadDePublicaciones * 0.9 ).toInt()
+
+  }
+
+  fun cantidadDeLikesPorUsuario(usuario: Usuario): Int
+  {
+    return 1
   }
 
   }
