@@ -44,8 +44,6 @@ class UsuarioTest : DescribeSpec({
           video1080.espacioQueOcupa().shouldBe(60)
         }
       }
-
-
     }
 
     describe("Un usuario") {
@@ -98,11 +96,8 @@ class UsuarioTest : DescribeSpec({
           bienvenida.agregarLike(pedro)
           bienvenida.agregarLike(pedro)
         }
-
       }
     }
-
-
 
     describe("Caralibro saber si un usuario no es mas amistoso que otro") {
       it("Usuario no es mas amistoso que otro") {
@@ -123,8 +118,6 @@ class UsuarioTest : DescribeSpec({
         caralibro.agregarUsuario(federica)
 
         caralibro.saberSiUnUsuarioEsMasAmistosoQueOtro(federica,pedro).shouldBe(false)
-
-
       }
     }
 
@@ -147,8 +140,6 @@ class UsuarioTest : DescribeSpec({
         caralibro.agregarUsuario(federica)
 
         caralibro.saberSiUnUsuarioEsMasAmistosoQueOtro(pedro,federica).shouldBe(true)
-
-
       }
     }
 
@@ -167,16 +158,11 @@ class UsuarioTest : DescribeSpec({
 
         federica.agregarAmigo(jose)
 
-
         var textoSaludo = Texto("Hola", PermisoSoloAmigos(federica.listaDeAmigos))
 
         federica.agregarPublicacion(textoSaludo)
 
         federica.puedeVerPublicacion(jose,textoSaludo).shouldBe(true)
-
-
-
-
       }
 
 
@@ -199,15 +185,8 @@ class UsuarioTest : DescribeSpec({
         federica.agregarPublicacion(textoSaludo)
 
         federica.puedeVerPublicacion(mirta,textoSaludo).shouldBe(false)
-
-
-
-
       }
-
     }
-
-
 
     describe("Saber el amigo mas popular") {
       it("Saber el amigo mas popular") {
@@ -235,7 +214,6 @@ class UsuarioTest : DescribeSpec({
       }
     }
 
-
     describe("Determinar los mejores amigos de un usuario") {
       it("Lista de mejores amigos") {
 
@@ -260,8 +238,6 @@ class UsuarioTest : DescribeSpec({
         federica.agregarAmigo(pedro)
 
         pedro.determinarLosMejoresAmigos().count().shouldBe(3)
-
-
       }
     }
 
@@ -299,8 +275,6 @@ class UsuarioTest : DescribeSpec({
 
         mirta.amigoMasPopular().shouldBe(pedro)
        // mirta.amigoMasPopular().shouldBe(federica)
-
-
       }
     }
 
@@ -407,11 +381,7 @@ class UsuarioTest : DescribeSpec({
         pedro.agregarAmigo(federica)
 
         pedro.usuarioStalkeaAmigo(mirta).shouldBe(false)
-
-
-
       }
     }
-
   }
 })

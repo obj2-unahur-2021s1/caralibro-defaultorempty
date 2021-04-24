@@ -1,10 +1,8 @@
 package ar.edu.unahur.obj2.caralibro
 
-import java.util.*
 import kotlin.math.ceil
 
 abstract class Publicacion(var tipoPermiso : Permiso) {
-  var  id = UUID.randomUUID()
 
   val listaDeLikes = mutableListOf<Usuario>()
 
@@ -22,10 +20,7 @@ abstract class Publicacion(var tipoPermiso : Permiso) {
   open fun cantidadDeLikes() : Int {
     return listaDeLikes.size
   }
-
-
 }
-
   class Foto(val alto: Int, val ancho: Int, tipoPermiso: Permiso) : Publicacion(tipoPermiso) {
     var factorDeCompresion = 0.7
     override fun espacioQueOcupa() = ceil(alto * ancho * factorDeCompresion).toInt()

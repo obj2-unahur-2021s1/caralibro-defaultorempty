@@ -1,11 +1,8 @@
 package ar.edu.unahur.obj2.caralibro
 
-import java.util.*
-
 class Usuario {
   val publicaciones = mutableListOf<Publicacion>()
   val listaDeAmigos = mutableListOf<Usuario>()
-  var  id = UUID.randomUUID()
 
   fun agregarPublicacion(publicacion: Publicacion) {
     publicaciones.add(publicacion)
@@ -24,7 +21,6 @@ class Usuario {
 
   fun puedeVerPublicacion(usuario: Usuario , publicacion: Publicacion) : Boolean
   {
-    //return publicaciones.contains(publicacion)
     val encontrada = publicaciones.first { it.equals(publicacion) }
 
     return encontrada.tipoPermiso.puedeVerPublicacion(usuario)
@@ -68,16 +64,10 @@ class Usuario {
   fun usuarioStalkeaAmigo( usuario: Usuario): Boolean
   {
     var cantidadDePublicaciones = publicaciones.count()
-   // var cantidadDeLikesDelUser = publicaciones.distinctBy { it.listaDeLikes.contains(usuario) }
     var cantidadDeLikesDelUser = publicaciones.count { it.listaDeLikes.contains(usuario) }
 
     return cantidadDeLikesDelUser >= (cantidadDePublicaciones * 0.9 ).toInt()
 
-  }
-
-  fun cantidadDeLikesPorUsuario(usuario: Usuario): Int
-  {
-    return 1
   }
 
   }
