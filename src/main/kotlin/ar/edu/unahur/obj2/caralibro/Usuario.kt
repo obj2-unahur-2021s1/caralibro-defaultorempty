@@ -27,11 +27,6 @@ class Usuario {
 
   }
 
-  fun darleLikePublicacion(usuario: Usuario , publicacion: Publicacion) :Unit
-  {
-    publicaciones.contains(publicacion)
-  }
-
   fun determinarLosMejoresAmigos() : List<Usuario>
   {
     var usuariosMejoresAmigos = mutableListOf<Usuario>()

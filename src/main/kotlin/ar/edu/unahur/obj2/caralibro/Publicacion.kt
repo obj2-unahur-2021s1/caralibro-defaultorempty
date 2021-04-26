@@ -7,7 +7,9 @@ abstract class Publicacion(var tipoPermiso : Permiso) {
   val listaDeLikes = mutableListOf<Usuario>()
 
   abstract fun espacioQueOcupa(): Int
-  abstract fun cambiarTipoDePermiso(permiso: Permiso): Unit
+  fun cambiarTipoDePermiso(permiso: Permiso) {
+    tipoPermiso = permiso
+  }
 
   open fun agregarLike(usuario: Usuario) {
     if (listaDeLikes.count()!= 0 && listaDeLikes.contains(usuario)) {
@@ -28,29 +30,16 @@ abstract class Publicacion(var tipoPermiso : Permiso) {
     fun cambiarFactorDeCompresion(nuevoFactorDeCompresion: Double) {
       factorDeCompresion = nuevoFactorDeCompresion
     }
-
-    override fun cambiarTipoDePermiso(permiso: Permiso) {
-      tipoPermiso = permiso
-    }
-
   }
 
   class Texto(val contenido: String, tipoPermiso: Permiso) : Publicacion(tipoPermiso) {
     override fun espacioQueOcupa() = contenido.length
-
-    override fun cambiarTipoDePermiso(permiso: Permiso) {
-      tipoPermiso = permiso
-    }
   }
 
   class Video(val duracionDelVideo: Int, val calidad: Calidad, tipoPermiso: Permiso) : Publicacion(tipoPermiso) {
 
     override fun espacioQueOcupa(): Int {
       return ceil(calidad.calcularCalidad(duracionDelVideo).toDouble()).toInt()
-    }
-
-    override fun cambiarTipoDePermiso(permiso: Permiso) {
-      tipoPermiso = permiso
     }
   }
 

@@ -16,21 +16,11 @@ class Caralibro {
         return usuario.espacioDePublicaciones()
     }
 
-    fun darleMeGustaAUnaPublicacion(usuario: Usuario ,usuarioDeLaPublicacion: Usuario,  publicacion: Publicacion) : Unit
-    {
-        usuarioDeLaPublicacion.darleLikePublicacion(usuario, publicacion)
-    }
-
     fun cuantosLikesTieneUnaPublicacion( publicacion: Publicacion ) = publicacion.cantidadDeLikes()
 
     fun saberSiUnUsuarioEsMasAmistosoQueOtro(usuario: Usuario, usuarioComparar: Usuario) : Boolean
     {
         return usuario.cantidadDeAmigos() > usuarioComparar.cantidadDeAmigos()
     }
-
-   //fun usuarioPuedeVerPublicacion(usuario: Usuario, usuarioComparar: Usuario) : Boolean
-   //{
-   //    return usuario.puedeVerPublicacion(usuarioComparar)
-   //}
 
 }
