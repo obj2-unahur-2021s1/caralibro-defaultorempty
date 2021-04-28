@@ -69,7 +69,6 @@ class UsuarioTest : DescribeSpec({
         juana.agregarPublicacion(video720)
         juana.agregarPublicacion(video1080)
 
-        //juana.espacioDePublicaciones().shouldBe(550548) sin videos
         juana.espacioDePublicaciones().shouldBe( 550648) // con videos 550548 + 10 + 30 + 60
       }
     }
@@ -274,7 +273,6 @@ class UsuarioTest : DescribeSpec({
         mirta.agregarAmigo(federica)
 
         mirta.amigoMasPopular().shouldBe(pedro)
-       // mirta.amigoMasPopular().shouldBe(federica)
       }
     }
 
@@ -309,7 +307,6 @@ class UsuarioTest : DescribeSpec({
         foto7.agregarLike(mirta)
         foto8.agregarLike(mirta)
         foto9.agregarLike(mirta)
-      //  videoSD.agregarLike(mirta)
         videoSD.agregarLike(jose)
 
         //pedroo cantida d likes 3
@@ -355,13 +352,7 @@ class UsuarioTest : DescribeSpec({
         foto1.agregarLike(mirta)
         foto2.agregarLike(mirta)
         foto3.agregarLike(mirta)
-       //foto4.agregarLike(mirta)
-       //foto5.agregarLike(mirta)
-       //foto6.agregarLike(mirta)
-       //foto7.agregarLike(mirta)
-       //foto8.agregarLike(mirta)
-       //foto9.agregarLike(mirta)
-        //  videoSD.agregarLike(mirta)
+
         videoSD.agregarLike(jose)
 
         //pedroo cantida d likes 3

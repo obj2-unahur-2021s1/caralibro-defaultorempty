@@ -18,6 +18,7 @@ class Caralibro {
 
     fun cuantosLikesTieneUnaPublicacion( publicacion: Publicacion ) = publicacion.cantidadDeLikes()
 
+    // Final
     fun saberSiUnUsuarioEsMasAmistosoQueOtro(usuario: Usuario, usuarioComparar: Usuario) : Boolean
     {
         return usuario.cantidadDeAmigos() > usuarioComparar.cantidadDeAmigos()
